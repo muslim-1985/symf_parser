@@ -71,15 +71,15 @@ class Users implements UserInterface
      */
     private string $password;
 
-//    /**
-//     * @ORM\OneToMany(targetEntity="App\Purchases\Entity\Purchases", mappedBy="owner", orphanRemoval=true)
-//     */
-//    private Collection $purchases;
-//
-//    public function __construct()
-//    {
-//        $this->purchases = new ArrayCollection();
-//    }
+    /**
+     * @ORM\OneToMany(targetEntity="App\Purchases\Entity\Purchases", mappedBy="owner", orphanRemoval=true)
+     */
+    private Collection $purchases;
+
+    public function __construct()
+    {
+        $this->purchases = new ArrayCollection();
+    }
 
     /**
      * @return boolean
@@ -207,34 +207,34 @@ class Users implements UserInterface
         // $this->plainPassword = null;
     }
 
-//    /**
-//     * @return Collection|Purchases[]
-//     */
-//    public function getPurchases(): Collection
-//    {
-//        return $this->purchases;
-//    }
-//
-//    public function addPurchase(Purchases $purchase): self
-//    {
-//        if (!$this->purchases->contains($purchase)) {
-//            $this->purchases[] = $purchase;
-//            $purchase->setOwner($this);
-//        }
-//
-//        return $this;
-//    }
-//
-//    public function removePurchase(Purchases $purchase): self
-//    {
-//        if ($this->purchases->contains($purchase)) {
-//            $this->purchases->removeElement($purchase);
-//            // set the owning side to null (unless already changed)
-//            if ($purchase->getOwner() === $this) {
-//                $purchase->setOwner(null);
-//            }
-//        }
-//
-//        return $this;
-//    }
+    /**
+     * @return Collection|Purchases[]
+     */
+    public function getPurchases(): Collection
+    {
+        return $this->purchases;
+    }
+
+    public function addPurchase(Purchases $purchase): self
+    {
+        if (!$this->purchases->contains($purchase)) {
+            $this->purchases[] = $purchase;
+            $purchase->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removePurchase(Purchases $purchase): self
+    {
+        if ($this->purchases->contains($purchase)) {
+            $this->purchases->removeElement($purchase);
+            // set the owning side to null (unless already changed)
+            if ($purchase->getOwner() === $this) {
+                $purchase->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
 }
