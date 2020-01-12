@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Security;
 
+use App\Users\Entity\Users;
 use App\Users\Repository\Contracts\UserRepositoryInterface;
 use App\Users\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -25,7 +26,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $this->router = $router;
     }
 
-    public function supports(Request $request)
+    public function supports(Request $request): bool
     {
         return $request->attributes->get('_route') === 'app_login'
             && $request->isMethod('POST');
@@ -36,7 +37,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         // TODO: Implement getLoginUrl() method.
     }
 
-    public function getCredentials(Request $request)
+    public function getCredentials(Request $request): array
     {
         return [
             'email' => $request->request->get('email'),
@@ -44,7 +45,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         ];
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider)
+    public function getUser($credentials, UserProviderInterface $userProvider): ?Users
     {
         return $this->userRepository->findOneBy(['email' => $credentials['email']]);
     }
