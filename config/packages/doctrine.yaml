@@ -19,9 +19,9 @@ doctrine:
             User:
                 is_bundle: false
                 type: annotation
-                dir: '%kernel.project_dir%/src/Users/Entity'
-                prefix: 'App\Users\Entity'
-                alias: Users
+                dir: '%kernel.project_dir%/src/User/Entity'
+                prefix: 'App\User\Entity'
+                alias: User
             Market:
                 is_bundle: false
                 type: annotation

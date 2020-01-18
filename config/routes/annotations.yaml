@@ -2,7 +2,7 @@ controllers:
     resource: ../../src/Controller/
     type: annotation
 user_controllers:
-    resource: ../../src/Users/Controller
+    resource: ../../src/User/Controller
     type: annotation
 market_controllers:
     resource: ../../src/Markets/Controller

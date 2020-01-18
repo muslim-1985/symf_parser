@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Users\Controller;
+namespace App\User\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;

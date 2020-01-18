@@ -3,9 +3,8 @@ declare(strict_types=1);
 
 namespace App\Security;
 
-use App\Users\Entity\Users;
-use App\Users\Repository\Contracts\UserRepositoryInterface;
-use App\Users\Repository\UserRepository;
+use App\User\Entity\User;
+use App\User\Repository\Contracts\UserRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
@@ -45,26 +44,25 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         ];
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider): ?Users
+    public function getUser($credentials, UserProviderInterface $userProvider): ?User
     {
         return $this->userRepository->findOneBy(['email' => $credentials['email']]);
     }
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        dd($user);
+        //dd($user);
         return true;
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        // todo
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        dd('sex');
-        //return new RedirectResponse($this->router->generate('app_homepage'));
+       // dd($this->router->generate('app_homepage'));
+        return RedirectResponse::create($this->router->generate('app_homepage'));
     }
 
     public function start(Request $request, AuthenticationException $authException = null)

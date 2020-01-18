@@ -1,20 +1,20 @@
 <?php
 declare(strict_types = 1);
 
-namespace App\Users\Repository;
+namespace App\User\Repository;
 
-use App\Users\Entity\Users;
-use App\Users\Repository\Contracts\UserRepositoryInterface;
+use App\User\Entity\User;
+use App\User\Repository\Contracts\UserRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @method Users|null find($id, $lockMode = null, $lockVersion = null)
- * @method Users|null findOneBy(array $criteria, array $orderBy = null)
- * @method Users[]    findAll()
- * @method Users[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method User|null find($id, $lockMode = null, $lockVersion = null)
+ * @method User|null findOneBy(array $criteria, array $orderBy = null)
+ * @method User[]    findAll()
+ * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
 {
@@ -24,7 +24,7 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
      */
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Users::class);
+        parent::__construct($registry, User::class);
     }
 
 
@@ -36,7 +36,7 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
      */
     public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
     {
-        if (!$user instanceof Users) {
+        if (!$user instanceof User) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
         }
 
@@ -46,7 +46,7 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
     }
 
     // /**
-    //  * @return Users[] Returns an array of Users objects
+    //  * @return User[] Returns an array of User objects
     //  */
     /*
     public function findByExampleField($value)
@@ -63,7 +63,7 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
     */
 
 
-//    public function findOneBySomeField($value): ?Users
+//    public function findOneBySomeField($value): ?User
 //    {
 //        return $this->createQueryBuilder('u')
 //            ->andWhere('u.email = :val')

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Purchases\Entity;
 
 use App\Markets\Entity\Markets;
-use App\Users\Entity\Users;
+use App\User\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -22,10 +22,10 @@ class Purchases
     private int $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Users\Entity\Users", inversedBy="purchases")
+     * @ORM\ManyToOne(targetEntity="App\User\Entity\User", inversedBy="purchases")
      * @ORM\JoinColumn(nullable=false)
      */
-    private Users $owner;
+    private User $owner;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -72,12 +72,12 @@ class Purchases
         return $this->id;
     }
 
-    public function getOwner(): ?Users
+    public function getOwner(): ?User
     {
         return $this->owner;
     }
 
-    public function setOwner(?Users $owner): self
+    public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
 

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace App\Users\Entity;
+namespace App\User\Entity;
 
 use App\Purchases\Entity\Purchases;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -11,9 +11,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Users\Repository\UserRepository")
+ * @ORM\Table(name="users")
+ * @ORM\Entity(repositoryClass="App\User\Repository\UserRepository")
  */
-class Users implements UserInterface
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
