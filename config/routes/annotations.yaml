@@ -4,6 +4,9 @@ controllers:
 user_controllers:
     resource: ../../src/User/Controller
     type: annotation
+admin_user_controllers:
+    resource: ../../src/User/Controller/Admin
+    type: annotation
 market_controllers:
     resource: ../../src/Markets/Controller
     type: annotation
