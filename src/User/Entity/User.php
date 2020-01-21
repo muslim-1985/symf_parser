@@ -6,6 +6,7 @@ namespace App\User\Entity;
 use App\Purchases\Entity\Purchases;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -13,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="App\User\Repository\UserRepository")
+ * @UniqueEntity("email")
  */
 class User implements UserInterface
 {
@@ -21,14 +23,14 @@ class User implements UserInterface
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank()
      * @Assert\Email()
      */
-    private string $email;
+    private $email;
 
     /**
      * @ORM\Column(type="string", length=180)
@@ -39,13 +41,13 @@ class User implements UserInterface
      *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
      * )
      */
-    private string $name;
+    private $name;
 
     /**
      * @ORM\Column(type="string", length=180)
      * @Assert\Ip()
      */
-    private string $ip;
+    private $ip;
 
     /**
      * @ORM\Column(type="boolean")
@@ -54,23 +56,23 @@ class User implements UserInterface
      *     message="The value {{ value }} is not a valid {{ type }}."
      * )
      */
-    private bool $is_active = true;
+    private $is_active = true;
 
     /**
      * @ORM\Column(type="json")
      */
-    private array $roles = [];
+    private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
      * @Assert\Length(
-     *      min = 6,
+     *      min = 5,
      *      minMessage = "Your password must be at least {{ limit }} characters long",
      * )
      */
-    private string $password;
+    private $password;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Purchases\Entity\Purchases", mappedBy="owner", orphanRemoval=true)
@@ -134,7 +136,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -152,7 +154,7 @@ class User implements UserInterface
      *
      * @see UserInterface
      */
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
         return (string) $this->email;
     }
