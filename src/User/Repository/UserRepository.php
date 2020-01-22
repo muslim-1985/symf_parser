@@ -45,6 +45,16 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
         $this->_em->flush();
     }
 
+    /**
+     * @param UserInterface $user
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function saveUser(UserInterface $user): void
+    {
+        $this->_em->persist($user);
+        $this->_em->flush();
+    }
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

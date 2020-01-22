@@ -3,27 +3,22 @@ declare(strict_types=1);
 
 namespace App\User\Form;
 
-
-use App\User\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserRegistrationForm extends AbstractType
+class UserLoginForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('email')
+            ->add('email', EmailType::class)
             ->add('password', PasswordType::class)
+            ->add('_remember_me', CheckboxType::class, [
+                'required' => false,
+            ])
         ;
-    }
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'data_class' => User::class,
-        ]);
     }
 }

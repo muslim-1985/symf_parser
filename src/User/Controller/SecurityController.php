@@ -6,6 +6,7 @@ namespace App\User\Controller;
 use App\Security\LoginFormAuthenticator;
 use App\User\Entity\User;
 use App\User\Form\UserRegistrationForm;
+use App\User\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,6 +16,13 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+    private UserService $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     /**
      * @Route("/users", name="users")
      */
@@ -63,14 +71,8 @@ class SecurityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var User $user */
             $user = $form->getData();
-            $user->setIp($request->getClientIp());
-            $user->setPassword($passwordEncoder->encodePassword(
-                $user,
-                $user->getPassword()
-            ));
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+            $encodePassword = $passwordEncoder->encodePassword($user, $user->getPassword());
+            $this->userService->createUser($user, $request->getClientIp(), $encodePassword);
             return $guardHandler->authenticateUserAndHandleSuccess
             (
                 $user,
