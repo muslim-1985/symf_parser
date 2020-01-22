@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Tests\User\Services;
 
-use App\Tests\User\NullObjects\UserRepository;
 use App\User\Entity\User;
+use App\User\Repository\Contracts\UserRepositoryInterface;
 use App\User\Service\UserService;
 use PHPUnit\Framework\TestCase;
 
@@ -16,7 +16,8 @@ class UserServiceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->userService = new UserService(new UserRepository());
+        $mockUserRepo = $this->createMock(UserRepositoryInterface::class);
+        $this->userService = new UserService($mockUserRepo);
         $this->user = new User();
     }
 
