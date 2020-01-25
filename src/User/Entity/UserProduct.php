@@ -4,7 +4,9 @@ declare(strict_types=1);
 namespace App\User\Entity;
 
 use App\Markets\Entity\MarketProducts;
+use App\Markets\Entity\Markets;
 use App\Purchases\Entity\PaymentMethod;
+use App\Purchases\Entity\Purchases;
 use App\User\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -57,9 +59,26 @@ class UserProduct
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateOfPurchase;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Purchases\Entity\Purchases", inversedBy="userProducts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $purchase;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Markets\Entity\Markets", inversedBy="userProducts")
+     */
+    private $market;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->dateOfPurchase = new \DateTime();
     }
 
     public function getId(): ?int
@@ -142,6 +161,42 @@ class UserProduct
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getPurchase(): ?Purchases
+    {
+        return $this->purchase;
+    }
+
+    public function setPurchase(?Purchases $purchase): self
+    {
+        $this->purchase = $purchase;
+
+        return $this;
+    }
+
+    public function getDateOfPurchase(): ?\DateTimeInterface
+    {
+        return $this->dateOfPurchase;
+    }
+
+    public function setDateOfPurchase(?\DateTimeInterface $dateOfPurchase): self
+    {
+        $this->dateOfPurchase = $dateOfPurchase;
+
+        return $this;
+    }
+
+    public function getMarket(): ?Markets
+    {
+        return $this->market;
+    }
+
+    public function setMarket(?Markets $market): self
+    {
+        $this->market = $market;
 
         return $this;
     }

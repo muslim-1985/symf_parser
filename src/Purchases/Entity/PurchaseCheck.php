@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Purchases\Entity;
 
+use App\Markets\Entity\MarketProducts;
 use App\Purchases\Entity\PaymentMethod;
 use App\Markets\Entity\Markets;
 use Doctrine\ORM\Mapping as ORM;
@@ -71,6 +72,12 @@ class PurchaseCheck
      * @ORM\JoinColumn(nullable=false)
      */
     private $paymentMethod;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Markets\Entity\MarketProducts", inversedBy="purchaseCheck", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $marketProduct;
 
     public function getId(): ?int
     {
@@ -181,6 +188,18 @@ class PurchaseCheck
     public function setPaymentMethod(?PaymentMethod $paymentMethod): self
     {
         $this->paymentMethod = $paymentMethod;
+
+        return $this;
+    }
+
+    public function getMarketProduct(): ?MarketProducts
+    {
+        return $this->marketProduct;
+    }
+
+    public function setMarketProduct(MarketProducts $marketProduct): self
+    {
+        $this->marketProduct = $marketProduct;
 
         return $this;
     }

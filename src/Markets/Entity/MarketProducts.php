@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Markets\Entity;
 
+use App\Purchases\Entity\PurchaseCheck;
 use App\Markets\Entity\ProductCategory;
 use App\User\Entity\UserProduct;
 use Doctrine\ORM\Mapping as ORM;
@@ -74,6 +75,11 @@ class MarketProducts
      * @ORM\ManyToOne(targetEntity="App\Markets\Entity\ProductCategory", inversedBy="marketProducts")
      */
     private $productCategory;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Purchases\Entity\PurchaseCheck", mappedBy="marketProduct", cascade={"persist", "remove"})
+     */
+    private $purchaseCheck;
 
     public function getTitle(): ?string
     {
@@ -208,6 +214,23 @@ class MarketProducts
     public function setLinkHash(string $linkHash): self
     {
         $this->linkHash = $linkHash;
+
+        return $this;
+    }
+
+    public function getPurchaseCheck(): ?PurchaseCheck
+    {
+        return $this->purchaseCheck;
+    }
+
+    public function setPurchaseCheck(PurchaseCheck $purchaseCheck): self
+    {
+        $this->purchaseCheck = $purchaseCheck;
+
+        // set the owning side of the relation if necessary
+        if ($purchaseCheck->getMarketProduct() !== $this) {
+            $purchaseCheck->setMarketProduct($this);
+        }
 
         return $this;
     }

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Purchases\Entity;
 
+use App\User\Entity\UserProduct;
 use App\Markets\Entity\Markets;
 use App\User\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -41,12 +42,18 @@ class Purchases
     {
         $this->checks = new ArrayCollection();
         $this->createdAt = new \DateTime();
+        $this->userProducts = new ArrayCollection();
     }
 
     /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\User\Entity\UserProduct", mappedBy="purchase", orphanRemoval=true)
+     */
+    private $userProducts;
 
 
     public function getId(): ?int
@@ -113,6 +120,37 @@ class Purchases
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserProduct[]
+     */
+    public function getUserProducts(): Collection
+    {
+        return $this->userProducts;
+    }
+
+    public function addUserProduct(UserProduct $userProduct): self
+    {
+        if (!$this->userProducts->contains($userProduct)) {
+            $this->userProducts[] = $userProduct;
+            $userProduct->setPurchase($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserProduct(UserProduct $userProduct): self
+    {
+        if ($this->userProducts->contains($userProduct)) {
+            $this->userProducts->removeElement($userProduct);
+            // set the owning side to null (unless already changed)
+            if ($userProduct->getPurchase() === $this) {
+                $userProduct->setPurchase(null);
+            }
+        }
 
         return $this;
     }

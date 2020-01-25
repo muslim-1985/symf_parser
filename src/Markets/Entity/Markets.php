@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Markets\Entity;
 
+use App\User\Entity\UserProduct;
 use App\Purchases\Entity\PurchaseCheck;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -60,10 +61,16 @@ class Markets
      */
     private $checks;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\User\Entity\UserProduct", mappedBy="market")
+     */
+    private $userProducts;
+
     public function __construct()
     {
         $this->checks = new ArrayCollection();
         $this->createdAt = new \DateTime();
+        $this->userProducts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -199,5 +206,36 @@ class Markets
     public function setLink($link): void
     {
         $this->link = $link;
+    }
+
+    /**
+     * @return Collection|UserProduct[]
+     */
+    public function getUserProducts(): Collection
+    {
+        return $this->userProducts;
+    }
+
+    public function addUserProduct(UserProduct $userProduct): self
+    {
+        if (!$this->userProducts->contains($userProduct)) {
+            $this->userProducts[] = $userProduct;
+            $userProduct->setMarket($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserProduct(UserProduct $userProduct): self
+    {
+        if ($this->userProducts->contains($userProduct)) {
+            $this->userProducts->removeElement($userProduct);
+            // set the owning side to null (unless already changed)
+            if ($userProduct->getMarket() === $this) {
+                $userProduct->setMarket(null);
+            }
+        }
+
+        return $this;
     }
 }
