@@ -19,53 +19,35 @@ class Purchases
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=200)
+     */
+    private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\User\Entity\User", inversedBy="purchases")
      * @ORM\JoinColumn(nullable=false)
      */
-    private User $owner;
+    private $owner;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToMany(targetEntity="App\Purchases\Entity\PurchaseCheck", mappedBy="market", orphanRemoval=true)
      */
-    private string $product_name;
+    private $checks;
 
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     */
-    private string $product_price;
-
-    /**
-     * @ORM\Column(type="string", length=200, nullable=true)
-     */
-    private string $product_market;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private \DateTimeInterface $date_of_purchase;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Markets\Entity\Markets", inversedBy="purchases")
-     */
-    private Collection $markets;
-
-    /**
-     * @ORM\Column(type="string", length=250, nullable=true)
-     */
-    private string $check_serial_number;
+    public function __construct()
+    {
+        $this->checks = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+    }
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private \DateTimeInterface $created_at;
+    private $createdAt;
 
-    public function __construct()
-    {
-        $this->markets = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -84,71 +66,6 @@ class Purchases
         return $this;
     }
 
-    public function getProductName(): ?string
-    {
-        return $this->product_name;
-    }
-
-    public function setProductName(string $product_name): self
-    {
-        $this->product_name = $product_name;
-
-        return $this;
-    }
-
-    public function getProductPrice(): ?string
-    {
-        return $this->product_price;
-    }
-
-    public function setProductPrice(?string $product_price): self
-    {
-        $this->product_price = $product_price;
-
-        return $this;
-    }
-
-    public function getProductMarket(): ?string
-    {
-        return $this->product_market;
-    }
-
-    public function setProductMarket(?string $product_market): self
-    {
-        $this->product_market = $product_market;
-
-        return $this;
-    }
-
-    public function getDateOfPurchase(): ?\DateTimeInterface
-    {
-        return $this->date_of_purchase;
-    }
-
-    public function setDateOfPurchase(?\DateTimeInterface $date_of_purchase): self
-    {
-        $this->date_of_purchase = $date_of_purchase;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Markets[]
-     */
-    public function getMarkets(): Collection
-    {
-        return $this->markets;
-    }
-
-    public function addMarket(Markets $market): self
-    {
-        if (!$this->markets->contains($market)) {
-            $this->markets[] = $market;
-        }
-
-        return $this;
-    }
-
     public function removeMarket(Markets $market): self
     {
         if ($this->markets->contains($market)) {
@@ -158,26 +75,44 @@ class Purchases
         return $this;
     }
 
-    public function getCheckSerialNumber(): ?string
+    /**
+     * @return Collection|PurchaseCheck[]
+     */
+    public function getChecks(): Collection
     {
-        return $this->check_serial_number;
+        return $this->checks;
     }
 
-    public function setCheckSerialNumber(?string $check_serial_number): self
+    public function addCheck(PurchaseCheck $check): self
     {
-        $this->check_serial_number = $check_serial_number;
+        if (!$this->checks->contains($check)) {
+            $this->checks[] = $check;
+            $check->setPurchase($this);
+        }
 
         return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

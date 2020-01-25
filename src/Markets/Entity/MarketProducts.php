@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Markets\Entity;
 
+use App\Markets\Entity\ProductCategory;
+use App\User\Entity\UserProduct;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,33 +17,63 @@ class MarketProducts
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=200)
      */
-    private string $title;
+    private $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $img_url;
+    private $image;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private string $price;
+    private $price;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $link;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $linkHash;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Markets\Entity\Markets", inversedBy="marketProducts")
      * @ORM\JoinColumn(nullable=false)
      */
-    private Markets $market;
+    private $market;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private \DateTimeInterface $created_at;
+    private $createdAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\User\Entity\UserProduct", mappedBy="marketProduct", cascade={"persist", "remove"})
+     */
+    private $userProduct;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Markets\Entity\ProductCategory", inversedBy="marketProducts")
+     */
+    private $productCategory;
 
     public function getTitle(): ?string
     {
@@ -57,12 +89,12 @@ class MarketProducts
 
     public function getImgUrl(): ?string
     {
-        return $this->img_url;
+        return $this->image;
     }
 
-    public function setImgUrl(?string $img_url): self
+    public function setImgUrl(?string $image): self
     {
-        $this->img_url = $img_url;
+        $this->image = $image;
 
         return $this;
     }
@@ -93,12 +125,89 @@ class MarketProducts
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getUserProduct(): ?UserProduct
+    {
+        return $this->userProduct;
+    }
+
+    public function setUserProduct(?UserProduct $userProduct): self
+    {
+        $this->userProduct = $userProduct;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newMarketProduct = null === $userProduct ? null : $this;
+        if ($userProduct->getMarketProduct() !== $newMarketProduct) {
+            $userProduct->setMarketProduct($newMarketProduct);
+        }
+
+        return $this;
+    }
+
+    public function getProductCategory(): ?ProductCategory
+    {
+        return $this->productCategory;
+    }
+
+    public function setProductCategory(?ProductCategory $productCategory): self
+    {
+        $this->productCategory = $productCategory;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * @param mixed $link
+     */
+    public function setLink($link): void
+    {
+        $this->link = $link;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLinkHash(): ?string
+    {
+        return $this->linkHash;
+    }
+
+    /**
+     * @param string $linkHash
+     * @return $this
+     */
+    public function setLinkHash(string $linkHash): self
+    {
+        $this->linkHash = $linkHash;
 
         return $this;
     }
