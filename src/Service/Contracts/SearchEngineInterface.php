@@ -10,5 +10,7 @@ interface SearchEngineInterface
 
     public function delete (array  $params);
 
-    public function search (array  $params);
+    public function get (array  $params);
+
+    public function search(array $params);
 }

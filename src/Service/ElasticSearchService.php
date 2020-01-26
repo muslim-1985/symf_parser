@@ -29,8 +29,13 @@ class ElasticSearchService implements SearchEngineInterface
         return $this->client->delete($params);
     }
 
-    public function search(array $params)
+    public function get(array $params)
     {
         return $this->client->get($params);
+    }
+
+    public function search(array $params)
+    {
+        return $this->client->search($params);
     }
 }

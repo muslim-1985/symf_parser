@@ -36,7 +36,7 @@ class AccountController extends AbstractController
             'id'    => 4,
         ];
 
-        $r = $this->elasticClient->search($params);
+        $r = $this->elasticClient->get($params);
         $cc=0;
         return $this->render('account/index.html.twig', [
             'controller_name' => 'AccountController',
