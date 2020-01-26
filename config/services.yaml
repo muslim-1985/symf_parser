@@ -23,5 +23,10 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    App\Service\ElasticSearchService:
+        autowire: true
+        arguments:
+            $elasticHost: 'http://127.0.0.1:9200'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
