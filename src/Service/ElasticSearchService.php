@@ -29,7 +29,7 @@ class ElasticSearchService implements SearchEngineInterface
         return $this->client->delete($params);
     }
 
-    public function get(array $params)
+    public function get(array $params): array
     {
         return $this->client->get($params);
     }

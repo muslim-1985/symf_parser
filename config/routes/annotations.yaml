@@ -8,8 +8,8 @@ admin_user_controllers:
     resource: ../../src/User/Controller/Admin
     type: annotation
 market_controllers:
-    resource: ../../src/Markets/Controller
+    resource: ../../src/Market/Markets/Controller
     type: annotation
 purchase_controllers:
-    resource: ../../src/Purchases/Controller
+    resource: ../../src/Market/Purchases/Controller
     type: annotation

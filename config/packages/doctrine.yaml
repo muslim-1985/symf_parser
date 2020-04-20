@@ -19,18 +19,18 @@ doctrine:
             User:
                 is_bundle: false
                 type: annotation
-                dir: '%kernel.project_dir%/src/User/Entity'
-                prefix: 'App\User\Entity'
+                dir: '%kernel.project_dir%/src/User/Model/Entity'
+                prefix: 'App\User\Model\Entity'
                 alias: User
             Market:
                 is_bundle: false
                 type: annotation
-                dir: '%kernel.project_dir%/src/Markets/Entity'
-                prefix: 'App\Markets\Entity'
+                dir: '%kernel.project_dir%/src/Market/Markets/Model/Entity'
+                prefix: 'App\Market\Markets\Model\Entity'
                 alias: Markets
             Purchase:
                 is_bundle: false
                 type: annotation
-                dir: '%kernel.project_dir%/src/Purchases/Entity'
-                prefix: 'App\Purchases\Entity'
+                dir: '%kernel.project_dir%/src/Market/Purchases/Model/Entity'
+                prefix: 'App\Market\Purchases\Model\Entity'
                 alias: Purchases

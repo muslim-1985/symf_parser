@@ -58,6 +58,11 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/register", name="app_register")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param GuardAuthenticatorHandler $guardHandler
+     * @param LoginFormAuthenticator $formAuthenticator
+     * @return \Symfony\Component\HttpFoundation\Response|null
      */
     public function register(
         Request $request,
