@@ -9,9 +9,9 @@ use App\User\Entity\UserProduct;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Market\Markets\Model\Repository\MarketProductsRepository")
+ * @ORM\Entity(repositoryClass="ParsingProductRepository")
  */
-class MarketProducts
+class ParsingProduct
 {
     /**
      * @ORM\Id()
@@ -117,12 +117,12 @@ class MarketProducts
         return $this;
     }
 
-    public function getMarket(): ?Markets
+    public function getMarket(): ?Market
     {
         return $this->market;
     }
 
-    public function setMarket(?Markets $market): self
+    public function setMarket(?Market $market): self
     {
         $this->market = $market;
 

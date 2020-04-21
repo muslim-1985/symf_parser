@@ -7,9 +7,9 @@ user_controllers:
 admin_user_controllers:
     resource: ../../src/User/Controller/Admin
     type: annotation
-market_controllers:
-    resource: ../../src/Market/Markets/Controller
-    type: annotation
-purchase_controllers:
-    resource: ../../src/Market/Purchases/Controller
-    type: annotation
+#market_controllers:
+#    resource: ../../src/ParsingProduct/ParsingProduct/Controller
+#    type: annotation
+#purchase_controllers:
+#    resource: ../../src/ParsingProduct/Purchase/Controller
+#    type: annotation

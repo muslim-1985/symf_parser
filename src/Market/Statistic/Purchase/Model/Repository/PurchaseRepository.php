@@ -13,7 +13,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method Purchases[]    findAll()
  * @method Purchases[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PurchasesRepository extends ServiceEntityRepository
+class PurchaseRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -21,7 +21,7 @@ class PurchasesRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Purchases[] Returns an array of Purchases objects
+    //  * @return Purchase[] Returns an array of Purchase objects
     //  */
     /*
     public function findByExampleField($value)
@@ -38,7 +38,7 @@ class PurchasesRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Purchases
+    public function findOneBySomeField($value): ?Purchase
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')

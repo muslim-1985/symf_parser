@@ -1,17 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Market\Markets\Model\Entity;
+namespace App\Market\Product\Model\Entity;
 
-use App\Market\Markets\Model\Entity\MarketProducts;
-use App\Market\Markets\Model\Entity\Markets;
+use App\Market\Markets\Model\Entity\Market;
 use App\Market\Purchases\Model\Entity\PaymentMethod;
-use App\Market\Purchases\Model\Entity\Purchases;
+use App\Market\Purchases\Model\Entity\Purchase;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="user_users_product")
- * @ORM\Entity(repositoryClass="App\User\Repository\UserProductRepository")
+ * @ORM\Table(name="user_product_products")
+ * @ORM\Entity(repositoryClass="App\Market\Product\Model\Repository\UserProductRepository")
  */
 class UserProduct
 {
@@ -32,7 +31,7 @@ class UserProduct
     private $price;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\User\Entity\User", inversedBy="userProducts")
+     * @ORM\ManyToOne(targetEntity="App\Market\Product\Model\Entity\User", inversedBy="userProducts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $owner;
@@ -42,11 +41,6 @@ class UserProduct
      * @ORM\JoinColumn(nullable=false)
      */
     private $paymentMethod;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Markets\Entity\MarketProducts", inversedBy="userProduct", cascade={"persist", "remove"})
-     */
-    private $marketProduct;
 
     /**
      * @ORM\Column(type="datetime")
@@ -133,18 +127,6 @@ class UserProduct
         return $this;
     }
 
-    public function getMarketProduct(): ?MarketProducts
-    {
-        return $this->marketProduct;
-    }
-
-    public function setMarketProduct(?MarketProducts $marketProduct): self
-    {
-        $this->marketProduct = $marketProduct;
-
-        return $this;
-    }
-
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -164,12 +146,12 @@ class UserProduct
         return $this;
     }
 
-    public function getPurchase(): ?Purchases
+    public function getPurchase(): ?Purchase
     {
         return $this->purchase;
     }
 
-    public function setPurchase(?Purchases $purchase): self
+    public function setPurchase(?Purchase $purchase): self
     {
         $this->purchase = $purchase;
 
@@ -188,12 +170,12 @@ class UserProduct
         return $this;
     }
 
-    public function getMarket(): ?Markets
+    public function getMarket(): ?Market
     {
         return $this->market;
     }
 
-    public function setMarket(?Markets $market): self
+    public function setMarket(?Market $market): self
     {
         $this->market = $market;
 

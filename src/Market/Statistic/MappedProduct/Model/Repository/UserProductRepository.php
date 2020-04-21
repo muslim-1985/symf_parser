@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Market\Markets\Model\Repository;
+namespace App\Market\Product\Model\Repository;
 
-use App\User\Entity\UserProduct;
+use App\Dependencies\RepositoryInterface;
+use App\Market\Product\Model\Entity\UserProduct;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -13,7 +14,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method UserProduct[]    findAll()
  * @method UserProduct[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserProductRepository extends ServiceEntityRepository
+class UserProductRepository extends ServiceEntityRepository implements RepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -48,4 +49,13 @@ class UserProductRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function add(object $entity): void
+    {
+        // TODO: Implement add() method.
+    }
+
+    public function flush(): void
+    {
+        // TODO: Implement flush() method.
+    }
 }

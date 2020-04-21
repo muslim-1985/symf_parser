@@ -3,8 +3,8 @@ declare(strict_types = 1);
 
 namespace App\User\Model\Repository;
 
-use App\User\Entity\User;
-use App\User\Repository\Contracts\UserRepositoryInterface;
+use App\Dependencies\RepositoryInterface;
+use App\User\Model\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @method User[]    findAll()
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
+class UserRepository extends ServiceEntityRepository implements RepositoryInterface
 {
     /**
      * UserRepository constructor.
@@ -50,9 +50,18 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function add(UserInterface $user): void
+    public function add(object $user): void
     {
         $this->_em->persist($user);
+    }
+
+    /**
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function flush(): void
+    {
+        $this->_em->flush();
     }
     // /**
     //  * @return User[] Returns an array of User objects

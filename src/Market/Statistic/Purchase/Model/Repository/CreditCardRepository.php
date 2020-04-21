@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Market\Purchases\Model\Repository;
 
-use App\Market\Purchases\Entity\CreditCard;
+use App\Market\Purchases\Model\Entity\CreditCard;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 

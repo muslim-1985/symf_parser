@@ -11,9 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Market\Markets\Model\Repository\MarketsRepository")
+ * @ORM\Entity(repositoryClass="MarketRepository")
  */
-class Markets
+class Market
 {
     /**
      * @ORM\Id()
@@ -131,14 +131,14 @@ class Markets
     }
 
     /**
-     * @return Collection|MarketProducts[]
+     * @return Collection|ParsingProduct[]
      */
     public function getMarketProducts(): Collection
     {
         return $this->marketProducts;
     }
 
-    public function addMarketProduct(MarketProducts $marketProduct): self
+    public function addMarketProduct(ParsingProduct $marketProduct): self
     {
         if (!$this->marketProducts->contains($marketProduct)) {
             $this->marketProducts[] = $marketProduct;
@@ -148,7 +148,7 @@ class Markets
         return $this;
     }
 
-    public function removeMarketProduct(MarketProducts $marketProduct): self
+    public function removeMarketProduct(ParsingProduct $marketProduct): self
     {
         if ($this->marketProducts->contains($marketProduct)) {
             $this->marketProducts->removeElement($marketProduct);

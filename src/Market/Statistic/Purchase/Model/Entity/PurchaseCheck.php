@@ -168,12 +168,12 @@ class PurchaseCheck
         return $this;
     }
 
-    public function getPurchase(): ?Purchases
+    public function getPurchase(): ?Purchase
     {
         return $this->market;
     }
 
-    public function setPurchase(?Purchases $purchase): self
+    public function setPurchase(?Purchase $purchase): self
     {
         $this->purchase = $purchase;
 

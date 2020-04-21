@@ -22,15 +22,15 @@ doctrine:
                 dir: '%kernel.project_dir%/src/User/Model/Entity'
                 prefix: 'App\User\Model\Entity'
                 alias: User
-            Market:
-                is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Market/Markets/Model/Entity'
-                prefix: 'App\Market\Markets\Model\Entity'
-                alias: Markets
-            Purchase:
-                is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Market/Purchases/Model/Entity'
-                prefix: 'App\Market\Purchases\Model\Entity'
-                alias: Purchases
+#            Market:
+#                is_bundle: false
+#                type: annotation
+#                dir: '%kernel.project_dir%/src/ParsingProduct/ParsingProduct/Model/Entity'
+#                prefix: 'App\Market\Markets\Model\Entity'
+#                alias: ParsingProduct
+#            Purchase:
+#                is_bundle: false
+#                type: annotation
+#                dir: '%kernel.project_dir%/src/ParsingProduct/Purchase/Model/Entity'
+#                prefix: 'App\Market\Purchases\Model\Entity'
+#                alias: Purchase

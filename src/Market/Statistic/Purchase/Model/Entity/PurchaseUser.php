@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Market\Purchases\Model\Entity;
 
-use App\Purchases\Entity\CreditCard;
-use App\Purchases\Entity\Purchases;
+use App\Market\Purchases\Model\Entity\CreditCard;
+use App\Market\Purchases\Model\Entity\Purchase;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -58,14 +58,14 @@ class PurchaseUser
     }
 
     /**
-     * @return Collection|Purchases[]
+     * @return Collection|Purchase[]
      */
     public function getPurchases(): Collection
     {
         return $this->purchases;
     }
 
-    public function addPurchase(Purchases $purchase): self
+    public function addPurchase(Purchase $purchase): self
     {
         if (!$this->purchases->contains($purchase)) {
             $this->purchases[] = $purchase;
@@ -75,7 +75,7 @@ class PurchaseUser
         return $this;
     }
 
-    public function removePurchase(Purchases $purchase): self
+    public function removePurchase(Purchase $purchase): self
     {
         if ($this->purchases->contains($purchase)) {
             $this->purchases->removeElement($purchase);

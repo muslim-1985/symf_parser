@@ -69,7 +69,7 @@ class ProductCategory
     }
 
     /**
-     * @return Collection|MarketProducts[]
+     * @return Collection|ParsingProduct[]
      */
     public function getMarketProducts(): Collection
     {
