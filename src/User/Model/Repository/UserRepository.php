@@ -3,12 +3,13 @@ declare(strict_types = 1);
 
 namespace App\User\Model\Repository;
 
-use App\Dependencies\RepositoryInterface;
-use App\User\Model\Entity\User;
+use App\Dependencies\Exceptions\EntityNotFoundException;
+use App\User\Model\Entity\User\Email;
+use App\User\Model\Entity\User\Id;
+use App\User\Model\Entity\User\User;
+use App\User\Model\Repository\Contracts\UserRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,10 +17,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @method User[]    findAll()
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserRepository extends ServiceEntityRepository implements RepositoryInterface
+class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
 {
     /**
-     * UserRepository constructor.
+     * CreatorRepository constructor.
      * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
@@ -27,28 +28,72 @@ class UserRepository extends ServiceEntityRepository implements RepositoryInterf
         parent::__construct($registry, User::class);
     }
 
-
     /**
-     * @param UserInterface $user
-     * @param string $newEncodedPassword
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @param string $token
+     * @return \App\Model\User\Entity\User\User|object|null
      */
-    public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
+    public function findByConfirmToken(string $token): ?User
     {
-        if (!$user instanceof User) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
-        }
-
-        $user->setPassword($newEncodedPassword);
-        $this->_em->persist($user);
-        $this->_em->flush();
+        return $this->findOneBy(['confirmToken' => $token]);
     }
 
     /**
-     * @param UserInterface $user
+     * @param string $token
+     * @return User|object|null
+     */
+    public function findByResetToken(string $token): ?User
+    {
+        return $this->findOneBy(['resetToken.token' => $token]);
+    }
+
+    public function get(Id $id): User
+    {
+        /** @var User $user */
+        if (!$user = $this->find($id->getValue())) {
+            throw new EntityNotFoundException('User is not found.');
+        }
+        return $user;
+    }
+
+    public function getByEmail(Email $email): User
+    {
+        /** @var User $user */
+        if (!$user = $this->findOneBy(['email' => $email->getValue()])) {
+            throw new EntityNotFoundException('User is not found.');
+        }
+        return $user;
+    }
+
+    public function hasByEmail(Email $email): bool
+    {
+        return $this->createQueryBuilder('t')
+                ->select('COUNT(t.id)')
+                ->andWhere('t.email = :email')
+                ->setParameter(':email', $email->getValue())
+                ->getQuery()->getSingleScalarResult() > 0;
+    }
+
+    /**
+     * @param string $network
+     * @param string $identity
+     * @return bool
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function hasByNetworkIdentity(string $network, string $identity): bool
+    {
+        return $this->createQueryBuilder('t')
+                ->select('COUNT(t.id)')
+                ->innerJoin('t.networks', 'n')
+                ->andWhere('n.network = :network and n.identity = :identity')
+                ->setParameter(':network', $network)
+                ->setParameter(':identity', $identity)
+                ->getQuery()->getSingleScalarResult() > 0;
+    }
+
+    /**
+     * @param object $user
      * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function add(object $user): void
     {
@@ -64,7 +109,7 @@ class UserRepository extends ServiceEntityRepository implements RepositoryInterf
         $this->_em->flush();
     }
     // /**
-    //  * @return User[] Returns an array of User objects
+    //  * @return ProductCreator[] Returns an array of ProductCreator objects
     //  */
     /*
     public function findByExampleField($value)
@@ -81,7 +126,7 @@ class UserRepository extends ServiceEntityRepository implements RepositoryInterf
     */
 
 
-//    public function findOneBySomeField($value): ?User
+//    public function findOneBySomeField($value): ?ProductCreator
 //    {
 //        return $this->createQueryBuilder('u')
 //            ->andWhere('u.email = :val')

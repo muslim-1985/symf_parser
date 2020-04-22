@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Security;
 
-use App\User\Entity\User;
-use App\User\Repository\Contracts\UserRepositoryInterface;
+use App\User\Model\Entity\User\User;
+use App\User\Model\Repository\Contracts\UserRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;

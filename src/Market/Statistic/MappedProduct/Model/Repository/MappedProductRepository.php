@@ -5,7 +5,7 @@ namespace App\Market\Product\Model\Repository;
 
 
 use App\Dependencies\RepositoryInterface;
-use App\Market\Product\Model\Entity\UserProduct;
+use App\Market\Product\Model\Entity\CreatorProduct;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -13,7 +13,7 @@ class MappedProductRepository extends ServiceEntityRepository implements Reposit
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, UserProduct::class);
+        parent::__construct($registry, CreatorProduct::class);
     }
     public function add(object $entity): void
     {

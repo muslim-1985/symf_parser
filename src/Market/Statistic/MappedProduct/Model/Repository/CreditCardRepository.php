@@ -16,7 +16,7 @@ class CreditCardRepository extends ServiceEntityRepository implements Repository
     }
 
     // /**
-    //  * @return UserProduct[] Returns an array of UserProduct objects
+    //  * @return CreatorProduct[] Returns an array of CreatorProduct objects
     //  */
     /*
     public function findByExampleField($value)
@@ -33,7 +33,7 @@ class CreditCardRepository extends ServiceEntityRepository implements Repository
     */
 
     /*
-    public function findOneBySomeField($value): ?UserProduct
+    public function findOneBySomeField($value): ?CreatorProduct
     {
         return $this->createQueryBuilder('u')
             ->andWhere('u.exampleField = :val')

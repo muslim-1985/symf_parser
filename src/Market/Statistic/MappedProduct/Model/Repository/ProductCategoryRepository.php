@@ -20,7 +20,7 @@ class ProductCategoryRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return ProductCategory[] Returns an array of ProductCategory objects
+    //  * @return MappedProductCategory[] Returns an array of MappedProductCategory objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class ProductCategoryRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?ProductCategory
+    public function findOneBySomeField($value): ?MappedProductCategory
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')
