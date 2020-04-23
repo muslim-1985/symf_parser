@@ -20,7 +20,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
 {
     /**
-     * CreatorRepository constructor.
+     * UserRepository constructor.
      * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)

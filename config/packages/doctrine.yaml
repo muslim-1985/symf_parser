@@ -30,18 +30,18 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            App:
-                is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
+#            App:
+#                is_bundle: false
+#                type: annotation
+#                dir: '%kernel.project_dir%/src/Entity'
+#                prefix: 'App\Entity'
+#                alias: App
             User:
                 is_bundle: false
                 type: annotation
                 dir: '%kernel.project_dir%/src/User/Model/Entity/User'
                 prefix: 'App\User\Model\Entity\User'
-                alias: ProductCreator
+                alias: User
 #            Market:
 #                is_bundle: false
 #                type: annotation

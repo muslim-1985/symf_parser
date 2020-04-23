@@ -6,10 +6,10 @@ namespace App\User\Model\UseCase\Network\Auth;
 
 class Command
 {
-    public string $network;
-    public string $identity;
-    public string $firstName;
-    public string $lastName;
+    public $network;
+    public $identity;
+    public $firstName;
+    public $lastName;
 
     public function __construct(string $network, string $identity)
     {

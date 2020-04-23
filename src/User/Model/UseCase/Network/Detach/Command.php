@@ -6,9 +6,9 @@ namespace App\User\Model\UseCase\Network\Detach;
 
 class Command
 {
-    public string $user;
-    public string $network;
-    public string $identity;
+    public $user;
+    public $network;
+    public $identity;
 
     public function __construct(string $user, string $network, string $identity)
     {

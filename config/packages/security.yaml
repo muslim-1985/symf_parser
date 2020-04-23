@@ -1,17 +1,14 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     encoders:
-        App\User\Entity\User:
+        App\Security\UserIdentity:
             algorithm: auto
 
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
-        app_user_provider:
-            entity:
-                class: App\User\Entity\User
-                property: email
+        fetcher:
+            id: App\Security\UserProvider
 
     firewalls:
         dev:
@@ -19,9 +16,12 @@ security:
             security: false
         main:
             anonymous: lazy
+            user_checker: App\Security\UserChecker
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
+                    - App\Security\OAuth\FacebookAuthenticator
+                entry_point: App\Security\LoginFormAuthenticator
             logout:
                 path: app_logout
             remember_me:

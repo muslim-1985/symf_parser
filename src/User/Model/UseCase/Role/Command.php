@@ -12,11 +12,11 @@ class Command
     /**
      * @Assert\NotBlank()
      */
-    public string $id;
+    public $id;
     /**
      * @Assert\NotBlank()
      */
-    public string $role;
+    public $role;
 
     public function __construct(string $id)
     {

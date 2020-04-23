@@ -6,7 +6,7 @@ namespace App\User\Model\UseCase\SignUp\Confirm\ByToken;
 
 class Command
 {
-    public string $token;
+    public $token;
 
     public function __construct(string $token)
     {

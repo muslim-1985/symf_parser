@@ -11,12 +11,12 @@ class Command
     /**
      * @Assert\NotBlank()
      */
-    public string $token;
+    public $token;
     /**
      * @Assert\NotBlank()
      * @Assert\Length(min=6)
      */
-    public string $password;
+    public $password;
 
     public function __construct(string $token)
     {

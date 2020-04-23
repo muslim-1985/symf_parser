@@ -6,7 +6,7 @@ namespace App\User\Model\UseCase\SignUp\Confirm\Manual;
 
 class Command
 {
-    public string $id;
+    public $id;
 
     public function __construct(string $id)
     {

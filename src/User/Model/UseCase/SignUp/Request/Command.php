@@ -11,19 +11,19 @@ class Command
     /**
      * @Assert\NotBlank()
      */
-    public string $firstName;
+    public $firstName;
     /**
      * @Assert\NotBlank()
      */
-    public string $lastName;
+    public $lastName;
     /**
      * @Assert\NotBlank()
      * @Assert\Email()
      */
-    public string $email;
+    public $email;
     /**
      * @Assert\NotBlank()
      * @Assert\Length(min=6)
      */
-    public string $password;
+    public $password;
 }
