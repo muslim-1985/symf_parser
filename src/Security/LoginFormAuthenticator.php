@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Security;
 
+use App\User\Model\Service\PasswordHasher;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
@@ -25,12 +26,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     private RouterInterface $router;
     private CsrfTokenManagerInterface $csrfTokenManager;
-    private UserPasswordEncoderInterface $passwordEncoder;
+    private PasswordHasher $passwordEncoder;
 
     public function __construct(
         RouterInterface $router,
         CsrfTokenManagerInterface $csrfTokenManager,
-        UserPasswordEncoderInterface $passwordEncoder
+        PasswordHasher $passwordEncoder
     )
     {
         $this->router = $router;
@@ -81,7 +82,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user): bool
     {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        return $this->passwordEncoder->validate($credentials['password'], $user->getPassword());
     }
 
 //    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
@@ -95,15 +96,5 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         }
         // dd($this->router->generate('app_homepage'));
         return RedirectResponse::create($this->router->generate('app_homepage'));
-    }
-
-    public function start(Request $request, AuthenticationException $authException = null)
-    {
-        // todo
-    }
-
-    public function supportsRememberMe()
-    {
-        // todo
     }
 }

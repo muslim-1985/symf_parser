@@ -2,7 +2,9 @@
     "devDependencies": {
         "@symfony/webpack-encore": "^0.29.0",
         "core-js": "^3.0.0",
+        "node-sass": "^4.14.0",
         "regenerator-runtime": "^0.13.2",
+        "sass-loader": "^7.3.1",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
@@ -14,6 +16,14 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@coreui/coreui": "^3.0.0"
+        "@coreui/coreui": "^3.0.0",
+        "@popperjs/core": "^2.3.3",
+        "bootstrap": "^4.4.1",
+        "font-awesome": "^4.7.0",
+        "jquery": "^3.5.0",
+        "perfect-scrollbar": "^1.5.0",
+        "popper.js": "^1.16.1",
+        "simple-line-icons": "^2.4.1",
+        "toastr": "^2.1.4"
     }
 }

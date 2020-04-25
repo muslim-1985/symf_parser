@@ -1,9 +1,9 @@
 <?php
 
-namespace App\ReadModel\User\Filter;
+namespace App\User\FetchModel\User\Filter;
 
-use App\Model\User\Entity\User\Role;
-use App\Model\User\Entity\User\User;
+use App\User\Model\Entity\User\Role;
+use App\User\Model\Entity\User\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\Form\FormBuilderInterface;

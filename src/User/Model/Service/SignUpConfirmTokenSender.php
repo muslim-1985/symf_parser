@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\User\Model\Service;
 
-use App\Model\User\Entity\User\Email;
+use App\User\Model\Entity\User\Email;
 use Twig\Environment;
 
 class SignUpConfirmTokenSender

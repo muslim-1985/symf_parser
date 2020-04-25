@@ -6,7 +6,7 @@ namespace App\User\FetchModel\User;
 
 use App\Dependencies\Exceptions\NotFoundException;
 use App\User\Model\Entity\User\User;
-use App\ReadModel\User\Filter\Filter;
+use App\User\FetchModel\User\Filter\Filter;
 use App\User\Model\Repository\Contracts\UserRepositoryInterface;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\FetchMode;
