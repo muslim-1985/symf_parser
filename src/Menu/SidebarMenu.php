@@ -10,8 +10,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class SidebarMenu
 {
-    private $factory;
-    private $auth;
+    private FactoryInterface $factory;
+    private AuthorizationCheckerInterface $auth;
 
     public function __construct(FactoryInterface $factory, AuthorizationCheckerInterface $auth)
     {
@@ -26,8 +26,8 @@ class SidebarMenu
 
         $menu->addChild('Dashboard', ['route' => 'home'])
             ->setExtra('icon', 'nav-icon icon-speedometer')
-            ->setAttribute('class', 'nav-item')
-            ->setLinkAttribute('class', 'nav-link');
+            ->setAttribute('class', 'c-header-nav-item px-3')
+            ->setLinkAttribute('class', 'c-header-nav-link');
 
 //        $menu->addChild('Work')->setAttribute('class', 'nav-title');
 
@@ -51,8 +51,6 @@ class SidebarMenu
 //                ->setLinkAttribute('class', 'nav-link');
 //        }
 
-        $menu->addChild('Control')->setAttribute('class', 'nav-title');
-
         if ($this->auth->isGranted('ROLE_MANAGE_USERS')) {
             $menu->addChild('Users', ['route' => 'users'])
                 ->setExtra('icon', 'nav-icon icon-people')
@@ -60,8 +58,8 @@ class SidebarMenu
                     ['route' => 'users'],
                     ['pattern' => '/^users\..+/']
                 ])
-                ->setAttribute('class', 'nav-item')
-                ->setLinkAttribute('class', 'nav-link');
+                ->setAttribute('class', 'c-header-nav-item px-3')
+                ->setLinkAttribute('class', 'c-header-nav-link');
         }
 
         $menu->addChild('Profile', ['route' => 'profile'])
@@ -70,8 +68,8 @@ class SidebarMenu
                 ['route' => 'profile'],
                 ['pattern' => '/^profile\..+/']
             ])
-            ->setAttribute('class', 'nav-item')
-            ->setLinkAttribute('class', 'nav-link');
+            ->setAttribute('class', 'c-header-nav-item px-3')
+            ->setLinkAttribute('class', 'c-header-nav-link');
 
         return $menu;
     }
