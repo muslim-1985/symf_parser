@@ -242,16 +242,16 @@ class UsersController extends AbstractController
         return $this->redirectToRoute('users.show', ['id' => $user->getId()]);
     }
 
-//    /**
-//     * @Route("/{id}", name=".show")
-//     * @param User $user
-//     * @param MemberFetcher $members
-//     * @return Response
-//     */
-//    public function show(User $user, MemberFetcher $members): Response
-//    {
-//        $member = $members->find($user->getId()->getValue());
-//
-//        return $this->render('app/users/show.html.twig', compact('user', 'member'));
-//    }
+    /**
+     * @Route("/{id}", name=".show")
+     * @param User $user
+     * @param UserFetcher $members
+     * @return Response
+     */
+    public function show(User $user, UserFetcher $members): Response
+    {
+        $member = $members->find($user->getId()->getValue());
+
+        return $this->render('app/users/show.html.twig', compact('user', 'member'));
+    }
 }

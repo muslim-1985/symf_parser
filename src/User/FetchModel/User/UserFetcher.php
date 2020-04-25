@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\User\FetchModel\User;
 
 use App\Dependencies\Exceptions\NotFoundException;
+use App\Model\Work\Entity\Members\Member\Member;
 use App\User\Model\Entity\User\User;
 use App\User\FetchModel\User\Filter\Filter;
 use App\User\Model\Repository\Contracts\UserRepositoryInterface;
@@ -24,6 +25,11 @@ class UserFetcher
         $this->connection = $connection;
         $this->repository = $repository;
         $this->paginator = $paginator;
+    }
+
+    public function find(string $id): ?User
+    {
+        return $this->repository->find($id);
     }
 
     public function existsByResetToken(string $token): bool
