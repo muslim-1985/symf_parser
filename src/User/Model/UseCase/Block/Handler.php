@@ -24,6 +24,6 @@ class Handler
 
         $user->block();
 
-        $this->users->flush();
+        $this->users->flush($user);
     }
 }

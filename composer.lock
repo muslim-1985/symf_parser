@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a9d0a0cb4e064657fa96b387eafc8107",
+    "content-hash": "8f2bf307689572d7d3167684580aac56",
     "packages": [
         {
             "name": "brick/math",
@@ -5264,6 +5264,55 @@
             "time": "2019-11-27T16:25:15+00:00"
         },
         {
+            "name": "symfony/process",
+            "version": "v5.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/process.git",
+                "reference": "3179f68dff5bad14d38c4114a1dab98030801fd7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/process/zipball/3179f68dff5bad14d38c4114a1dab98030801fd7",
+                "reference": "3179f68dff5bad14d38c4114a1dab98030801fd7",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Process\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Process Component",
+            "homepage": "https://symfony.com",
+            "time": "2020-04-15T15:59:10+00:00"
+        },
+        {
             "name": "symfony/property-access",
             "version": "v5.0.2",
             "source": {
@@ -5997,16 +6046,16 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v5.0.2",
+            "version": "v5.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "3ae6fad7a3dc2d99a023f9360184628fc44acbb3"
+                "reference": "99b831770e10807dca0979518e2c89edffef5978"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/3ae6fad7a3dc2d99a023f9360184628fc44acbb3",
-                "reference": "3ae6fad7a3dc2d99a023f9360184628fc44acbb3",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/99b831770e10807dca0979518e2c89edffef5978",
+                "reference": "99b831770e10807dca0979518e2c89edffef5978",
                 "shasum": ""
             },
             "require": {
@@ -6070,7 +6119,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2019-12-12T13:03:32+00:00"
+            "time": "2020-03-27T16:56:45+00:00"
         },
         {
             "name": "symfony/translation-contracts",
@@ -6671,6 +6720,51 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2019-12-10T11:06:55+00:00"
+        },
+        {
+            "name": "thiagoalessio/tesseract_ocr",
+            "version": "2.9.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thiagoalessio/tesseract-ocr-for-php.git",
+                "reference": "e932f7410e753434b26b214f3f322933efafa0f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thiagoalessio/tesseract-ocr-for-php/zipball/e932f7410e753434b26b214f3f322933efafa0f0",
+                "reference": "e932f7410e753434b26b214f3f322933efafa0f0",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4 || ^7.0"
+            },
+            "require-dev": {
+                "codacy/coverage": "dev-master",
+                "phpunit/php-code-coverage": "^2.2.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "thiagoalessio\\TesseractOCR\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "thiagoalessio",
+                    "email": "thiagoalessio@me.com"
+                }
+            ],
+            "description": "A wrapper to work with Tesseract OCR inside PHP.",
+            "keywords": [
+                "OCR",
+                "Tesseract",
+                "text recognition"
+            ],
+            "time": "2020-01-27T19:53:35+00:00"
         },
         {
             "name": "twig/extra-bundle",

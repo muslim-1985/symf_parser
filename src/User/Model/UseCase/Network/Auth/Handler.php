@@ -37,6 +37,6 @@ class Handler
 
         $this->users->add($user);
 
-        $this->users->flush();
+        $this->users->flush($user);
     }
 }

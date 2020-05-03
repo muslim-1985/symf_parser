@@ -28,6 +28,6 @@ class Handler
             $command->last
         ));
 
-        $this->users->flush();
+        $this->users->flush($user);
     }
 }

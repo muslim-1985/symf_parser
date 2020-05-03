@@ -29,6 +29,6 @@ class Handler
             $this->hasher->hash($command->password)
         );
 
-        $this->users->flush();
+        $this->users->flush($user);
     }
 }

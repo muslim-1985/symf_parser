@@ -57,6 +57,6 @@ class Handler
 
         $this->sender->send($email, $token);
 
-        $this->users->flush();
+        $this->users->flush($user);
     }
 }

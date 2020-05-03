@@ -22,12 +22,12 @@ class SidebarMenu
     public function build(): ItemInterface
     {
         $menu = $this->factory->createItem('root')
-            ->setChildrenAttributes(['class' => 'nav']);
+            ->setChildrenAttributes(['class' => 'c-sidebar-nav']);
 
         $menu->addChild('Dashboard', ['route' => 'home'])
             ->setExtra('icon', 'nav-icon icon-speedometer')
-            ->setAttribute('class', 'c-header-nav-item px-3')
-            ->setLinkAttribute('class', 'c-header-nav-link');
+            ->setAttribute('class', 'c-sidebar-nav-item')
+            ->setLinkAttribute('class', 'c-sidebar-nav-link');
 
 //        $menu->addChild('Work')->setAttribute('class', 'nav-title');
 
@@ -58,18 +58,19 @@ class SidebarMenu
                     ['route' => 'users'],
                     ['pattern' => '/^users\..+/']
                 ])
-                ->setAttribute('class', 'c-header-nav-item px-3')
-                ->setLinkAttribute('class', 'c-header-nav-link');
+                ->setAttribute('class', 'c-sidebar-nav-item')
+                ->setLinkAttribute('class', 'c-sidebar-nav-link');
         }
 
-        $menu->addChild('Profile', ['route' => 'profile'])
-            ->setExtra('icon', 'nav-icon icon-user')
-            ->setExtra('routes', [
-                ['route' => 'profile'],
-                ['pattern' => '/^profile\..+/']
-            ])
-            ->setAttribute('class', 'c-header-nav-item px-3')
-            ->setLinkAttribute('class', 'c-header-nav-link');
+//        $menu->addChild('Work')->setAttribute('class', 'nav-title');
+//        $menu->addChild('Profile', ['route' => 'profile'])
+//            ->setExtra('icon', 'nav-icon icon-user')
+//            ->setExtra('routes', [
+//                ['route' => 'profile'],
+//                ['pattern' => '/^profile\..+/']
+//            ])
+//            ->setAttribute('class', 'c-header-nav-item px-3')
+//            ->setLinkAttribute('class', 'c-header-nav-link');
 
         return $menu;
     }

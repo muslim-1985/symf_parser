@@ -8,8 +8,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
@@ -95,6 +93,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             return RedirectResponse::create($targetPath);
         }
         // dd($this->router->generate('app_homepage'));
-        return RedirectResponse::create($this->router->generate('app_homepage'));
+        return RedirectResponse::create($this->router->generate('home'));
     }
 }

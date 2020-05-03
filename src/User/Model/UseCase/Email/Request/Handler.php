@@ -42,7 +42,7 @@ class Handler
             $token = $this->tokenizer->generate()
         );
 
-        $this->users->flush();
+        $this->users->flush($user);
 
         $this->sender->send($email, $token);
     }

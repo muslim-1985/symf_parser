@@ -6,5 +6,5 @@ namespace App\Dependencies\Contracts;
 interface RepositoryInterface
 {
     public function add(object $entity): void;
-    public function flush(): void;
+    public function flush(AggregateRoot ...$roots): void;
 }

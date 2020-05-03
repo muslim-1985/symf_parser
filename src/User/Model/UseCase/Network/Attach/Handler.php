@@ -30,6 +30,6 @@ class Handler
             $command->identity
         );
 
-        $this->users->flush();
+        $this->users->flush($user);
     }
 }

@@ -82,14 +82,14 @@ class Purchase
     }
 
     /**
-     * @return Collection|PurchaseCheck[]
+     * @return Collection|Receipt[]
      */
     public function getChecks(): Collection
     {
         return $this->checks;
     }
 
-    public function addCheck(PurchaseCheck $check): self
+    public function addCheck(Receipt $check): self
     {
         if (!$this->checks->contains($check)) {
             $this->checks[] = $check;

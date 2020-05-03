@@ -25,6 +25,6 @@ class Handler
 
         $user->changeRole(new Role($command->role));
 
-        $this->users->flush();
+        $this->users->flush($user);
     }
 }

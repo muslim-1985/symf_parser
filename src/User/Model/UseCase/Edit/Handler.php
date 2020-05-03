@@ -32,6 +32,6 @@ class Handler
             )
         );
 
-        $this->users->flush();
+        $this->users->flush($user);
     }
 }

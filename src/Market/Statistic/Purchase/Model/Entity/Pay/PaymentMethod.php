@@ -66,7 +66,7 @@ class PaymentMethod
     }
 
     /**
-     * @return Collection|PurchaseCheck[]
+     * @return Collection|Receipt[]
      */
     public function getChecks(): Collection
     {

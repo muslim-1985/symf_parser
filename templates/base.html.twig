@@ -15,61 +15,43 @@
 <body class="c-app">
 <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
     <div class="c-sidebar-brand d-lg-down-none">
-
+        <span class="c-sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
+            <img src="/svg/brand/cib-angular.svg" alt="signet">
+        </span>
+        <span class="c-sidebar-brand-minimized" width="46" height="46" alt="CoreUI Logo">
+            <img src="/svg/brand/cib-angular.svg" alt="signet">
+        </span>
     </div>
     <ul class="c-sidebar-nav">
-        <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="{{ path('home') }}">
-                Dashboard
-            </a>
-        </li>
-        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a
-                    class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-                User</a>
-            <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ path('profile') }}"><i class="fa fa-user"></i> Profile</a>
-                </li>
-                <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ path('app_logout') }}"><i class="fa fa-lock"></i> Logout</a>
-                </li>
-            </ul>
-        </li>
+        {{ knp_menu_render('sidebar', {'currentClass': 'active'}) }}
     </ul>
-    <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent"
-            data-class="c-sidebar-minimized"></button>
 </div>
 <div class="c-wrapper c-fixed-components">
     <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
-        <button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar"
-                data-class="c-sidebar-show">
-            toggle
-            <span class="navbar-toggler-icon">toggle</span>
-        </button>
-        <a class="c-header-brand d-lg-none" href="#">
-
-        </a>
-        <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar"
-                data-class="c-sidebar-lg-show" responsive="true">
-            <svg class="c-icon c-icon-lg">
-                <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-menu"></use>
-            </svg>
+        <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true">
+            <span class="c-icon c-icon-lg">
+                <img src="/svg/free/cil-menu.svg" alt="bhgfh">
+            </span>
         </button>
         <ul class="c-header-nav d-md-down-none">
-            {{ knp_menu_render('sidebar', {'currentClass': 'active'}) }}
+{#            {{ knp_menu_render('sidebar', {'currentClass': 'active'}) }}#}
         </ul>
         <ul class="c-header-nav ml-auto mr-4">
-            <li class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#"
-                                                      role="button" aria-haspopup="true" aria-expanded="false">
-{#                    <div class="c-avatar"><img class="c-avatar-img" src="assets/img/avatars/6.jpg" alt="user@email.com">#}
-{#                    </div>#}
-                    {{ app.user.display | default("")}}
-                </a>
-                <div class="dropdown-menu dropdown-menu-right pt-0">
-                    <a class="dropdown-item" href="{{ path('profile') }}"><i class="fa fa-user"></i> Profile</a>
-                    <a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fa fa-lock"></i> Logout</a>
-                </div>
-            </li>
+            {% if is_granted('ROLE_USER') %}
+                <li class="c-header-nav-item dropdown">
+                        <a class="c-header-nav-link" data-toggle="dropdown" href="#"
+                                                              role="button" aria-haspopup="true" aria-expanded="false">
+                            {{ app.user.display | default("")}}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right pt-0">
+                            <a class="dropdown-item" href="{{ path('profile') }}"><i class="fa fa-user"></i> Profile</a>
+                            <a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fa fa-lock"></i> Logout</a>
+                        </div>
+                </li>
+            {% else %}
+                <li class="c-header-nav-item px-1"><a class="c-header-nav-link" href="{{ path('app_login') }}">Login</a></li>
+                <li class="c-header-nav-item px-1"><a class="c-header-nav-link" href="{{ path('auth.signup') }}">Sign Up</a></li>
+            {% endif %}
         </ul>
         <div class="c-subheader px-3">
             <!-- Breadcrumb-->
@@ -93,16 +75,6 @@
         </footer>
     </div>
 </div>
-{#<!-- CoreUI and necessary plugins-->#}
-{#<script src="node_modules/@coreui/coreui/dist/js/coreui.bundle.min.js"></script>#}
-{#<!--[if IE]><!-->#}
-{#<script src="node_modules/@coreui/icons/js/svgxuse.min.js"></script>#}
-{#<!--<![endif]-->#}
-{#<!-- Plugins and scripts required by this view-->#}
-{#<script src="node_modules/@coreui/chartjs/dist/js/coreui-chartjs.bundle.js"></script>#}
-{#<script src="node_modules/@coreui/utils/dist/coreui-utils.js"></script>#}
-{#<script src="js/main.js"></script>#}
-
 
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}

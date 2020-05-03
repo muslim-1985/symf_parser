@@ -3,13 +3,17 @@ declare(strict_types = 1);
 
 namespace App\User\Model\Repository;
 
+use App\Dependencies\Contracts\AggregateRoot;
+use App\Dependencies\Contracts\RepositoryInterface;
 use App\Dependencies\Exceptions\EntityNotFoundException;
+use App\Event\Dispatcher\EventDispatcher;
 use App\User\Model\Entity\User\Email;
 use App\User\Model\Entity\User\Id;
 use App\User\Model\Entity\User\User;
 use App\User\Model\Repository\Contracts\UserRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,19 +23,19 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
 {
+    private EventDispatcher $dispatcher;
+
     /**
      * UserRepository constructor.
      * @param ManagerRegistry $registry
+     * @param EventDispatcher $dispatcher
      */
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, EventDispatcher $dispatcher)
     {
+        $this->dispatcher = $dispatcher;
         parent::__construct($registry, User::class);
     }
 
-    /**
-     * @param string $token
-     * @return \App\Model\User\Entity\User\User|object|null
-     */
     public function findByConfirmToken(string $token): ?User
     {
         return $this->findOneBy(['confirmToken' => $token]);
@@ -90,24 +94,6 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
                 ->setParameter(':identity', $identity)
                 ->getQuery()->getSingleScalarResult() > 0;
     }
-
-    /**
-     * @param object $user
-     * @throws \Doctrine\ORM\ORMException
-     */
-    public function add(object $user): void
-    {
-        $this->_em->persist($user);
-    }
-
-    /**
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function flush(): void
-    {
-        $this->_em->flush();
-    }
     // /**
     //  * @return ProductCreator[] Returns an array of ProductCreator objects
     //  */
@@ -136,4 +122,25 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
 //        ;
 //    }
 
+    /**
+     * @param object $user
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function add(object $user): void
+    {
+        $this->_em->persist($user);
+    }
+
+    /**
+     * @param AggregateRoot[] $roots
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function flush (AggregateRoot ...$roots): void
+    {
+        $this->_em->flush();
+        foreach ($roots as $root) {
+            $this->dispatcher->dispatch($root->releaseEvents());
+        }
+    }
 }

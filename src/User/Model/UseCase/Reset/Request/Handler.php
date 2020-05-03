@@ -35,7 +35,7 @@ class Handler
             new \DateTimeImmutable()
         );
 
-        $this->users->flush();
+        $this->users->flush($user);
 
         $this->sender->send($user->getEmail(), $user->getResetToken());
     }

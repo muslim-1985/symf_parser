@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\User\Model\Entity\User;
 
+use App\Dependencies\Contracts\AggregateRoot;
+use App\Event\EventsTrait;
+use App\User\Event\UserEdited;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,8 +18,9 @@ use Doctrine\ORM\Mapping as ORM;
  *     @ORM\UniqueConstraint(columns={"reset_token_token"})
  * })
  */
-class User
+class User implements AggregateRoot
 {
+    use EventsTrait;
     public const STATUS_WAIT = 'wait';
     public const STATUS_ACTIVE = 'active';
     public const STATUS_BLOCKED = 'blocked';
@@ -217,6 +221,11 @@ class User
     {
         $this->name = $name;
         $this->email = $email;
+        $this->recordEvent(new UserEdited(
+            $this->id,
+            $this->name,
+            $this->email
+        ));
     }
 
     public function changeRole(Role $role): void

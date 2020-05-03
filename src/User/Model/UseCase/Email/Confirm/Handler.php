@@ -24,6 +24,6 @@ class Handler
 
         $user->confirmEmailChanging($command->token);
 
-        $this->users->flush();
+        $this->users->flush($user);
     }
 }
