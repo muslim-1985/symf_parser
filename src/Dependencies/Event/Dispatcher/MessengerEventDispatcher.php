@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Event\Dispatcher;
+namespace App\Dependencies\Event\Dispatcher;
 
-use App\Event\Dispatcher\Message\Message;
+use App\Dependencies\Event\Dispatcher\Message\Message;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 class MessengerEventDispatcher implements EventDispatcher

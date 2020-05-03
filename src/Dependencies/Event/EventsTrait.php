@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Event;
+namespace App\Dependencies\Event;
 
 trait EventsTrait
 {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\User\Model\Entity\User;
 
 use App\Dependencies\Contracts\AggregateRoot;
-use App\Event\EventsTrait;
+use App\Dependencies\Event\EventsTrait;
 use App\User\Event\UserEdited;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;

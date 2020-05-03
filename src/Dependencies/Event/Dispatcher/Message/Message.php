@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Event\Dispatcher\Message;
+namespace App\Dependencies\Event\Dispatcher\Message;
 
 class Message
 {

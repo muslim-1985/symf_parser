@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Event\Dispatcher;
+namespace App\Dependencies\Event\Dispatcher;
 
 
 interface EventDispatcher

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Event\Dispatcher\Message;
+namespace App\Dependencies\Event\Dispatcher\Message;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 class Handler implements MessageHandlerInterface
 {
-    private $dispatcher;
+    private EventDispatcherInterface $dispatcher;
 
     public function __construct(EventDispatcherInterface $dispatcher)
     {

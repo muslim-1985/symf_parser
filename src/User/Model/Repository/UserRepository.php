@@ -4,16 +4,14 @@ declare(strict_types = 1);
 namespace App\User\Model\Repository;
 
 use App\Dependencies\Contracts\AggregateRoot;
-use App\Dependencies\Contracts\RepositoryInterface;
 use App\Dependencies\Exceptions\EntityNotFoundException;
-use App\Event\Dispatcher\EventDispatcher;
+use App\Dependencies\Event\Dispatcher\EventDispatcher;
 use App\User\Model\Entity\User\Email;
 use App\User\Model\Entity\User\Id;
 use App\User\Model\Entity\User\User;
 use App\User\Model\Repository\Contracts\UserRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
