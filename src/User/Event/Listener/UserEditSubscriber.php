@@ -9,7 +9,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class UserEditSubscriber implements EventSubscriberInterface
 {
-
+    /**
+     * @override
+     */
     public static function getSubscribedEvents(): array
     {
         return [
