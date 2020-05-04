@@ -57,11 +57,12 @@ class RoleCommand extends Command
             foreach ($violations as $violation) {
                 $output->writeln('<error>' . $violation->getPropertyPath() . ': ' . $violation->getMessage() . '</error>');
             }
-            return;
+            return 0;
         }
 
         $this->handler->handle($command);
 
         $output->writeln('<info>Done!</info>');
+        return 0;
     }
 }

@@ -91,10 +91,10 @@ services:
 
     storage:
         build:
-            context: ./docker/development
+            context: ./storage/docker/development
             dockerfile: nginx.docker
         volumes:
-            - ./:/app
+            - ./storage:/app
         ports:
             - "8081:80"
     storage-ftp:
@@ -104,7 +104,7 @@ services:
             FTP_USER_PASS: secret
             FTP_USER_HOME: /app
         volumes:
-            - ./public:/app
+            - ./storage/public:/app
 
     mailer:
         image: mailhog/mailhog
