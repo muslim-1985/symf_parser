@@ -31,7 +31,7 @@ class ConfirmCommand extends Command
             ->setDescription('Confirms signed up user');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $helper = $this->getHelper('question');
 
@@ -45,5 +45,6 @@ class ConfirmCommand extends Command
         $this->handler->handle($command);
 
         $output->writeln('<info>Done!</info>');
+        return 0;
     }
 }
