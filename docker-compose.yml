@@ -14,6 +14,8 @@ services:
         build:
             context: ./docker/development
             dockerfile: php-fpm.docker
+        environment:
+            PHP_IDE_CONFIG: serverName=parser
         volumes:
             - ./:/app
         depends_on:
